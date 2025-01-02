@@ -1,4 +1,10 @@
-import {createStore} from "redux";
-import {CountReducer} from "../reducer/CountReducer.ts";
+import {combineReducers, createStore} from "redux";
+import CustomerReducer from "../reducer/CustomerReducer.ts";
+import ItemReducer from "../reducer/ItemReducer.ts";
 
-export const store = createStore(CountReducer)
+const rootReducer = combineReducers({
+    customer : CustomerReducer,
+    item : ItemReducer,
+})
+
+export const store = createStore(rootReducer);

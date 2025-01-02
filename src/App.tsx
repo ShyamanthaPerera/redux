@@ -1,24 +1,30 @@
 import './App.css'
 import {useDispatch, useSelector} from "react-redux";
+import {useState} from "react";
 
 function App() {
 
-  const {count, visible} = useSelector(state => state);
+    const customer = useSelector(state => state.customer);
+    const item = useSelector(state => state.item);
 
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  const toggle = () => {
-      dispatch({type: 'RESET'})
-  }
+    const [customerName, setCustomerName] = useState('');
+    const [itemName, setItemName] = useState('');
 
   return (
-    <>
-      {visible && count}
-      <br/>
-      <button onClick={() => dispatch({type:'INCREMENT'})}>Increment</button>
-      <button onClick={() => dispatch({type:'DECREMENT'})}>Decrement</button>
-      <button onClick={toggle}>Toggle</button>
-    </>
+      <>
+          <input type="text" placeholder="Customer Name" value={customerName} onChange={(e) => setCustomerName(e.target.value)}/>
+          <button onClick={() => dispatch({type: 'ADD_CUSTOMER', payload: customerName})}></button>
+          <br/>
+          <input type="text" placeholder="Item Name" value={itemName} onChange={(e) => setItemName(e.target.value)}/>
+          <button onClick={() => dispatch({type: 'ADD_ITEM', payload: itemName})}></button>
+
+          <br/>
+          {customer}
+          <br/>
+          {item}
+      </>
   )
 }
 
